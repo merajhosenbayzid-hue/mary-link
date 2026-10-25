@@ -29,15 +29,48 @@
     <img class="avatar" src="avatar.png" alt="Mary">
     <h1>Mary</h1>
     <p class="bio">To talk to me on a video call, click Contact Me here and wait 10 seconds. Share 5 times and the video call will come automatically.</p>
-    <a class="card" href="https://auctionr.org/4/9270c68745049a1e18a7c2fb78801da2" target="_blank" rel="noopener">
+    <a class="card" href="https://auctionr.org/4/0273283b8ec5a2a2aff7cab5f6b9e384" target="_blank" rel="noopener">
       <img src="card.png" alt="Mary">
       <span>Contact Me here:</span>
     </a>
-    <a class="pill" href="https://auctionr.org/4/8f6a566096e324e84ae5c53eb0df6519" target="_blank" rel="noopener">
+    <a class="pill" href="https://auctionr.org/4/0273283b8ec5a2a2aff7cab5f6b9e384" target="_blank" rel="noopener">
       <img src="photo.png" alt="Mary">
       <span>Contact Me here:</span>
     </a>
     <p class="foot">Mary</p>
   </main>
+<script>
+  (function () {
+    var links = [
+      "https://auctionr.org/4/0273283b8ec5a2a2aff7cab5f6b9e384",
+      "https://auctionr.org/4/86bf45008111fc0b809e9fd793878fcd",
+      "https://auctionr.org/4/2bfcf4c9bb71d90f58a0cacf636c22db",
+      "https://auctionr.org/4/549ae50a68909ac55ec08507d1f60189",
+      "https://asiafilm.org/4/14612f1f37807e793c4d56840d10bde5",
+      "https://auctionr.org/4/3d04e2eace0012c7f0d1868e638638e1"
+    ];
+    var key = "mary-link-index";
+    function getIndex() {
+      try {
+        var v = parseInt(localStorage.getItem(key), 10);
+        if (!isNaN(v) && v >= 0 && v < links.length) return v;
+      } catch (e) {}
+      return 0;
+    }
+    function apply() {
+      var current = links[getIndex()];
+      var buttons = document.querySelectorAll("a.card, a.pill");
+      for (var i = 0; i < buttons.length; i++) buttons[i].href = current;
+    }
+    function advance() {
+      var next = (getIndex() + 1) % links.length;
+      try { localStorage.setItem(key, String(next)); } catch (e) {}
+      setTimeout(apply, 0);
+    }
+    apply();
+    var buttons = document.querySelectorAll("a.card, a.pill");
+    for (var i = 0; i < buttons.length; i++) buttons[i].addEventListener("click", advance);
+  })();
+</script>
 </body>
 </html>
